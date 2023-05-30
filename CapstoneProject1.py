@@ -100,7 +100,7 @@ def show2(Dict, printFormat):
     Silahkan {} masukkan angka dari pilihan berikut:
 
     1. Melihat semua daftar buku yang tersedia
-    2. Mencari buku tertentu yang tersedia
+    2. Mencari buku tertentu
     3. Kembali ke menu utama
 
     """.format(nama))
@@ -133,8 +133,8 @@ def show2(Dict, printFormat):
             --------------------------------------""")  
             show2(Dict, printFormat) 
     elif S1==2:
-        k=1 #Iterasi pengurutan nilai di list yang bersesuaian dengan nilai "No"
-        l=0 #Iterasi untuk memastikan apakah ada buku yang tersedia untuk bisa dicari
+        k=1 
+        l=0 
         for value in E.values():
             if 'Tersedia' in value: 
                 l=l+1  
@@ -151,10 +151,10 @@ def show2(Dict, printFormat):
             if l2!=0:
                 for value in E.values():
                     if E['column']==value:
-                        print(printFormat.format("", *value)) #menampikan semua nilai dari value pada key "column" 
+                        print(printFormat.format("", *value)) 
                     else:
                         if S2 in value: 
-                            value[0]=k #Perubahan nilai list yang bersesuaian dengan nilai "No", pada value yg memiliki nilai "Tersedia"
+                            value[0]=k 
                             k+=1
                             l2=l2+1
                             print(printFormat.format("", *value))
@@ -239,17 +239,17 @@ def minjam(Nama,NIS,listBuku,tgl_skrg):
             main()
         E=listBuku.copy()
         printFormat = "{:<2}" + "{:<19}" * (len(E['column']))
-        k=1 #Iterasi pengurutan nilai di list yang bersesuaian dengan nilai "No"
-        l=0 #Iterasi untuk memastikan apakah ada buku yang tersedia untuk bisa dipinjam
+        k=1 
+        l=0 
         for value in E.values():
             if E['column']==value:
-                print(printFormat.format("", *value)) #menampikan semua nilai dari value pada key "column" 
+                print(printFormat.format("", *value))  
             else:
                 if 'Tersedia' in value: 
-                    value[0]=k #Perubahan nilai list yang bersesuaian dengan nilai "No", pada value yg memiliki nilai "Tersedia"
+                    value[0]=k 
                     k+=1
                     l=l+1
-                    print(printFormat.format("", *value)) #menampilkan semua nilai dari value yang dicek pada key tertentu. value yang dicek harus memiliki nilai "Tersedia"
+                    print(printFormat.format("", *value)) 
                 else:
                     value[0]=0
         if l==0:
