@@ -23,7 +23,7 @@ Collection Data Type yang digunakan dalam aplikasi ini berupa dictionary dengan 
 
 •	Fungsi login
 
-Fungsi login akan dipanggil ketika user baru pertama kali menjalankan program sebelum masuk ke menu utama, atau dengan memilih Menu 9 yaitu "Log in ulang" pada fungsi main Pada menu ini user akan diminta menginput nama user sebagai pengunjung perpustakaan yang memiliki NIS/NIP dan menginput NIS/NIP milik user (Nomor Induk Siswa atau Nomor Induk Pegawai bagi guru).
+Fungsi login akan dipanggil ketika user baru pertama kali menjalankan program sebelum masuk ke menu utama, atau dengan memilih Menu 9 yaitu "Log in ulang" pada fungsi main. Pada menu ini user akan diminta menginput nama user sebagai pengunjung perpustakaan yang memiliki NIS/NIP dan menginput NIS/NIP milik user (Nomor Induk Siswa atau Nomor Induk Pegawai bagi guru).
 
 
 •	Fungsi main
