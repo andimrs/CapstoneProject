@@ -2,6 +2,21 @@ import sys
 import pyinputplus as pypi 
 from datetime import datetime
 
+
+# Dalam program ini Anda bisa mengatur:
+# 1. Banyaknya buku dan informasi terkait data buku tersebut, dapat diatur pada (> if __name__ == "__main__":)
+# 2. Tanggal waktu kunjung atau waktu saat program dijalankan, dapat diatur pada (> def login():)
+# 3. Batas jumlah peminjaman buku, dapat diatur pada (> def batas(listBuku,nis):)
+# 4. Maksimal dan minimal waktu peminjaman buku, dapat diatur pada (> def waktu_minjam(W1):)
+# 5. Password untuk mengakses beberapa menu, dapat diatur pada (> def main():)
+
+# Pengaturan Awal Program
+# 1. Terdapat 5 buku, 3 buku sudah dipinjam oleh satu orang yang sama dan 2 buku sisanya tersedia 
+# 2. Tanggal waktu kunjung atau waktu saat program dijalankan yaitu 2023-05-24
+# 3. Batas jumlah peminjaman buku sebanyak 3 buah per orang dengan kode uniknya NIS/NIK
+# 4. Maksimal dan minimal waktu peminjaman buku berturut-turut 7 hari dan 1 hari dari tanggal peminjaman buku
+# 5. Passwordnya jcds01, yang harus dimasukkan dalam menu Menambahkan Buku,Mengupdate Tahun Edisi Buku, dan Menghapus Buku
+
 def batas(listBuku,nis):
     print("Berikut daftar buku yang sebelumnya Anda pinjam: ")
     E=listBuku.copy()
@@ -21,7 +36,7 @@ def batas(listBuku,nis):
     """.format(l))                
     if l==3:
         print("""
-        Anda tidak bisa mmeminjam buku lagi
+        Anda tidak bisa meminjam buku lagi
         Maksimal buku yang bisa dipinjam per mahasiswa sebanyak 3 buah
         """)
         main()
@@ -29,6 +44,7 @@ def batas(listBuku,nis):
         print("Berikut daftar buku yang tersedia: ")
         
 def delete1(C,nama):
+    
     while True:           
         print(
                         """
@@ -61,9 +77,9 @@ def delete1(C,nama):
                             """.format(val[1],val[2],val[3]))
                             A=pypi.inputInt(prompt='Silahkan masukkan angka dari pilihan yang tersedia: ', blockRegexes='0', lessThan=3)
                             if A==1:
-                                print(len(F)) #6
+                                print(len(F)) 
                                 del F[val[0]]
-                                print(len(F)) #5
+                                print(len(F)) 
                                 listBuku={}
                                 listBuku['column']=F[0]
                                 for i in range(1,len(F)):
@@ -79,7 +95,7 @@ def delete1(C,nama):
                                 for ValuesD in listBuku.values():
                                     if listBuku['column']!=ValuesD:
                                         ValuesD[0]=k
-                                        k=k+1 
+                                        k=k+1  
                                 delete1(listBuku,nama)
                             elif A==2:
                                 print("Anda tidak jadi menghapus buku tersebut")
@@ -95,12 +111,13 @@ def delete1(C,nama):
           
 def show2(Dict, printFormat):
     E=Dict.copy()
+    C=Dict.copy()
     print("""
 
     Silahkan {} masukkan angka dari pilihan berikut:
 
-    1. Melihat semua daftar buku yang tersedia
-    2. Mencari buku tertentu
+    1. Menampilkan semua daftar buku yang tersedia
+    2. Mengecek status ketersediaan buku tertentu
     3. Kembali ke menu utama
 
     """.format(nama))
@@ -112,19 +129,51 @@ def show2(Dict, printFormat):
             if 'Tersedia' in value: 
                 l=l+1
         if l!=0:
-            print("Berikut daftar buku yang tersedia: ")
-            printFormat = "{:<2}" + "{:<19}" * (len(E['column']))
-            k=1 
-            l=0 
-            for value in E.values():
-                if E['column']==value:
-                    print(printFormat.format("", *value))  
+            D=C.copy()
+            F=[]
+            i=0
+            #Mengubah Dict menjadi list
+            for v in C.values():
+                F.insert(i,v)
+                i=i+1
+            #print(F)
+            F1=F.copy()
+            A=[]
+            #Mengambil semua judul buku menjadi 1 list
+            for i in range(1, len(F)):
+                A.insert(i,F[i][1])
+            #print(A)
+            #Mengurutkan judul buku dalam list
+            A.sort()
+            #print(A)
+
+            listBuku={}
+            listBuku['column']=F[0]
+            i=1
+            #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
+            for item in A:
+                for x,y in D.items():
+                    if item in y:
+                        C['buku-'+str(i-1)]=y
+                        i=i+1
+            #print(C)
+            printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+            ##Daftar semua buku
+            k=1
+            for ValuesD in C.values():
+                if C['column']!=ValuesD:
+                    ValuesD[0]=k
+                    k=k+1    
+            k=1
+            for value in C.values():
+                if C['column']==value:
+                    print("Berikut daftar buku yang tersedia berdasarkan urutan judul buku dari A-Z, a-z: ")
+                    print(printFormat.format("", *value)) 
                 else:
-                    if 'Tersedia' in value: 
+                    if "Tersedia" in value: 
                         value[0]=k 
                         k+=1
-                        l=l+1
-                        print(printFormat.format("", *value)) 
+                        print(printFormat.format("", *value))
             show2(Dict, printFormat)            
         if l==0:
             print("""
@@ -174,33 +223,118 @@ def show2(Dict, printFormat):
     elif S1==3:
         main()
      
-def show(listBuku, printFormat, title="\nDaftar Semua Buku di Perpustakaan Sains Yogya\n"):
-    """_summary_
+def show(listBuku, printFormat):
+     
+    print(
+                        """
 
-    Args:
-        Dict (dictionary): dict yang akan ditampilkan
-        printFormat (string): format tampilan di prompt
-        title (str, optional): judul tampilan. Defaults to "\nDaftar Semua Buku di Perpustakaan Sains Yogya\n".
-    """
-    print(title)
-    k=1
-    for ValuesD in listBuku.values():
-        if listBuku['column']!=ValuesD:
-            ValuesD[0]=k
-            k=k+1    
-    for value in listBuku.values():
-        print(printFormat.format("", *value))
-    print("""
-    Apakah Anda ingin kembali ke menu utama?
-    1. Ya
-    2. Tidak
-    """)
-    L = pypi.inputInt(prompt='Silahkan masukkan angka dari pilihan yang tersedia: ', blockRegexes='0', lessThan=3)
-    if L==1:
+                Silahkan {} masukkan angka dari pilihan berikut:
+
+                1. Menampilkan daftar semua buku berdasarkan urutan judul buku dari A-Z, a-z
+                2. Menampilkan daftar semua buku berdasarkan urutan NISB dari 0-9
+                3. Kembali ke menu utama
+                
+            """.format(nama)
+                )
+    S1=pypi.inputInt(prompt='', blockRegexes='0', lessThan=4)
+    C=listBuku.copy()
+    if S1==1:
+        D=C.copy()
+        F=[]
+        i=0
+        #Mengubah Dict menjadi list
+        for v in C.values():
+            F.insert(i,v)
+            i=i+1
+        #print(F)
+        F1=F.copy()
+        A=[]
+        #Mengambil semua judul buku menjadi 1 list
+        for i in range(1, len(F)):
+            A.insert(i,F[i][1])
+        #print(A)
+        #Mengurutkan judul buku dalam list
+        A.sort()
+        #print(A)
+
+        listBuku={}
+        listBuku['column']=F[0]
+        i=1
+        #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
+        for item in A:
+            for x,y in D.items():
+                if item in y:
+                    C['buku-'+str(i-1)]=y
+                    i=i+1
+        #print(C)
+        printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+        ##Daftar semua buku
+        k=1
+        for ValuesD in C.values():
+            if C['column']!=ValuesD:
+                ValuesD[0]=k
+                k=k+1    
+        for value in C.values():
+            print(printFormat.format("", *value))
+
+        k=1
+        for ValuesD in listBuku.values():
+            if listBuku['column']!=ValuesD:
+                ValuesD[0]=k
+                k=k+1    
         main()
-    elif L==2:
-        show(listBuku, printFormat)
 
+    elif S1==2:
+        D=C.copy()
+        F=[]
+        i=0
+        #Mengubah Dict menjadi list
+        for v in C.values():
+            F.insert(i,v)
+            i=i+1
+        #print(F)
+        F1=F.copy()
+        A=[]
+        #Mengambil semua judul buku menjadi 1 list
+        for i in range(1, len(F)):
+            A.insert(i,F[i][3])
+        #print(A)
+        #Mengurutkan judul buku dalam list
+        A.sort()
+        #print(A)
+
+        listBuku={}
+        listBuku['column']=F[0]
+        i=1
+        #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
+        for item in A:
+            for x,y in D.items():
+                if item in y:
+                    C['buku-'+str(i-1)]=y
+                    i=i+1
+        #print(C)
+        printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+        ##Daftar semua buku
+        k=1
+        for ValuesD in C.values():
+            if C['column']!=ValuesD:
+                ValuesD[0]=k
+                k=k+1    
+        for value in C.values():
+            print(printFormat.format("", *value))        
+
+        k=1
+        for ValuesD in listBuku.values():
+            if listBuku['column']!=ValuesD:
+                ValuesD[0]=k
+                k=k+1    
+
+   
+        main()
+
+    elif S1==3:
+        main()
+    
 def waktu_minjam(W1):
     while True:
         global B_minjam
@@ -254,8 +388,9 @@ def minjam(Nama,NIS,listBuku,tgl_skrg):
                     value[0]=0
         if l==0:
             print('Maaf tidak ada stok buku yang tersedia')            
-            continue           
-        A= input('Masukkan ISBN buku yang ingin dipinjam: ')
+            continue 
+        print('Kami sarankan Anda untuk melihat daftar buku yang tersedia terlebih dahulu yang sudah diurutkan berdasarkan ISBN atau Judul Buku')          
+        A= input('Masukkan ISBN buku yang ingin dipinjam (): ')
         i=0
         for value in E.values():
             if A in value:
@@ -586,6 +721,12 @@ def nambah(listBuku,printFormat):
 
                     Anda berhasil menambahkan buku tersebut
                     """)
+                    k=1
+                    for ValuesD in listBuku.values():
+                        if listBuku['column']!=ValuesD:
+                            ValuesD[0]=k
+                            k=k+1   
+
                     nambah(listBuku,printFormat)
                 elif n1==2:
                     print("Anda tidak jadi menambahkan buku tersebut")
@@ -652,6 +793,11 @@ def update(listBuku,printFormat):
                     Anda berhasil mengupdate tahun edisi buku tersebut
                     
                     """)
+                            k=1
+                            for ValuesD in listBuku.values():
+                                if listBuku['column']!=ValuesD:
+                                    ValuesD[0]=k
+                                    k=k+1   
                             update(listBuku,printFormat)
 
                         elif U3==2:
@@ -672,43 +818,43 @@ def main():
     print(
             """
 
-Halo, selamat datang {} ({}) di Perpustakaan Universitas Sains Yogyakarta
+Halo, selamat datang {} ({}) di Perpustakaan Sains 
 Waktu Kunjungan Anda: {} 
 
 Silahkan pilih menu dengan memasukkan angka sesuai menu yang ingin dijalankan:
 
-1. Menambahkan buku (Fitur Create)
-2. Menampilkan daftar buku tertentu (Fitur Read)
-3. Mengupdate Tahun Edisi Buku (Fitur Update)
-4. Menghapus buku (Fitur Delete)
-5. Menampilkan Daftar Semua Buku
-6. Meminjam Buku
-7. Mengembalikan Buku
-8. Memperpanjang Buku
-9. Log in ulang
+1. Menampilkan Daftar Semua Buku 
+2. Menampilkan Daftar Buku Tertentu
+3. Meminjam Buku
+4. Mengembalikan Buku
+5. Memperpanjang Buku
+6. Menambahkan Buku
+7. Mengupdate Tahun Edisi Buku 
+8. Menghapus Buku
+9. Log In Kembali
 10. Exit
 """.format(nama, nis, waktu_kunjung)
         )
     while True:
         # Input menu yang akan dijalankan
         menuNumber=input('Silahkan masukkan angka dari pilihan yang tersedia: ')
-        # Menu untuk menampilkan daftar buku dengan memanggil fungsi show
-        if menuNumber == '5':
+        # Menu untuk menampilkan daftar semua buku dengan memanggil fungsi show
+        if menuNumber == '1':
             show(listBuku, printFormat)
         #Menu untuk menampilkan daftar buku tertentu dengan memanggil fungsi show2
         elif menuNumber =='2':
             show2(listBuku, printFormat)
         # Menu untuk meminjam buku dengan memanggil fungsi minjam
-        elif menuNumber == '6':
+        elif menuNumber == '3':
             minjam(nama,nis,listBuku,waktu_kunjung)
         # Menu untuk mengembalikan buku dengan memanggil fungsi kembali
-        elif menuNumber == '7':
+        elif menuNumber == '4':
             kembali(nama,nis,listBuku,waktu_kunjung)
         # Menu untuk memperpanjang buku dengan memanggil fungsi panjang
-        elif menuNumber == '8':
+        elif menuNumber == '5':
             panjang(nama,nis,listBuku,waktu_kunjung)
         # Menu untuk menambah buku dengan memanggil fungsi nambah
-        elif menuNumber == '1':
+        elif menuNumber == '6':
             print("""
             Perhatian! 
             Menu menambahkan buku hanya bisa diakses oleh Petugas Perpustakaan yang berwenang
@@ -738,7 +884,7 @@ Silahkan pilih menu dengan memasukkan angka sesuai menu yang ingin dijalankan:
             elif P==2:
                 main()
         # Menu untuk menghapus buku dengan memanggil fungsi delete(1)
-        elif menuNumber == '4':
+        elif menuNumber == '8':
             print("""
             Perhatian! 
             Menu menghapus buku hanya bisa diakses oleh Petugas Perpustakaan yang berwenang
@@ -768,8 +914,36 @@ Silahkan pilih menu dengan memasukkan angka sesuai menu yang ingin dijalankan:
             elif P==2:
                 main()
         # Menu untuk mengupdate buku
-        elif menuNumber == '3':
-            update(listBuku,printFormat)
+        elif menuNumber == '7':
+            print("""
+            Perhatian! 
+            Menu mengupdate buku hanya bisa diakses oleh Petugas Perpustakaan yang berwenang
+            Untuk mengakses menu mengupdate buku Anda harus memasukkan password terlebih dahulu
+
+            Silahkan masukkan angka dari pilihan berikut:
+            1. Lanjut memasukkan password
+            2. Kembali ke menu utama
+
+            """)
+            P = pypi.inputInt(prompt='', blockRegexes='0', lessThan=3)
+            if P==1:
+                while True:
+                    Pass=input("Silahkan Masukkan password untuk bisa mengupdate buku, jika Anda lupa password masukkan angka 0 untuk kembali ke menu utama: ")
+                    if Pass=="jcds01":
+                        print("""
+                Password yang Anda masukkan benar
+                """)
+                        update(listBuku,printFormat)
+                    elif Pass=='0':
+                        main()
+                    else:
+                        print("""
+                Password yang Anda masukkan salah
+                Silahkan coba lagi
+                """)
+            elif P==2:
+                main()
+
         # Menu untuk login kembali
         elif menuNumber == '9':
             login()
@@ -781,14 +955,14 @@ Silahkan pilih menu dengan memasukkan angka sesuai menu yang ingin dijalankan:
 
 def login():
     print("""
-    ##########################################
-    SELAMAT DATANG DI PERPUSTAKAAN SAINS YOGYA
-    ##########################################
+    ####################################
+    SELAMAT DATANG DI PERPUSTAKAAN SAINS
+    ####################################
     """)
     global nama
     global nis
     global waktu_kunjung
-    waktu_kunjung='2023-05-24' 
+    waktu_kunjung='2023-05-24' #Diatur manual tanggalnya
     nama= pypi.inputStr(prompt='Silahkan masukkan nama lengkap Anda: ' , applyFunc=lambda x: x.capitalize(), blockRegexes='1234567890')
     nis1 = pypi.inputInt(prompt='Silahkan masukkan NIS/NIP Anda: ')
     nis=str(nis1)
@@ -812,14 +986,14 @@ if __name__ == "__main__":
     #Variabel listBuku berupa Dict didalamnya berupa list
     listBuku = {
         'column': ["No", "Judul Buku", "Edisi Buku", "ISBN", "Status", "Peminjam","NIS/NIK", "Tanggal Pinjam", "Tanggal Pengembalian"],
-        'buku-0': [1, "Kimia VII", 2016, "111", "Tersedia", " ", " ", " ", " " ],
-        'buku-1': [2, "Fisika VII", 2017, "222", "Dipinjam", "Andi", "10116072", "2023-05-21", "2023-05-23"],
-        'buku-2': [3, "Aktuaria VII", 2018, "333", "Tersedia", " ", " "," ", " " ],
-        'buku-3': [4, "Matematika VII", 2019, "444", "Dipinjam", "Andi","10116072", "2023-05-14", "2023-05-24"],
-        'buku-4' :[5, "Astronomi VII", 2020, "555", "Dipinjam", "Andi","10116072", "2023-05-16", "2023-05-28"]
+        'buku-0': [1, "Kimia", 2016, "333", "Tersedia", " ", " ", " ", " " ],
+        'buku-1': [2, "Fisika", 2017, "222", "Dipinjam", "Andi", "10116072", "2023-05-21", "2023-05-23"],
+        'buku-2': [3, "Aktuaria", 2018, "111", "Tersedia", " ", " "," ", " " ],
+        'buku-3': [4, "Math", 2019, "555", "Dipinjam", "Andi","10116072", "2023-05-14", "2023-05-24"],
+        'buku-4' :[5, "Astro", 2020, "444", "Dipinjam", "Andi","10116072", "2023-05-16", "2023-05-28"]
     }
     # Deklarasi format jarak antar kata di prompt
-    printFormat = "{:<2}" + "{:<19}" * (len(listBuku['column']))
+    printFormat = "{:<2}" + "{:<17}" * (len(listBuku['column']))
 
-# Memanggil fugsi login saat pertama kali program dijalankan
+# Memanggil fungsi login saat pertama kali program dijalankan
 login()
