@@ -8,7 +8,7 @@ Untuk mengkloning dari github, jalankan kode berikut:
 
     mkdir folder
     cd folder
-    git clone git@github.com:nornh/capstone_project.git
+    git clone git@github.com:andimrs/CapstoneProject.git
 
 Untuk menginstal persyaratan yang dibutuhkan menggunakan pip, jalankan kode berikut:
 
