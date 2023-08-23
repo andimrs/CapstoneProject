@@ -121,6 +121,7 @@ def show2(Dict, printFormat):
     3. Kembali ke menu utama
 
     """.format(nama))
+    C9=Dict.copy()
     S1=pypi.inputInt(prompt='', blockRegexes='0', lessThan=4)
     if S1==1:
         k=1 
@@ -129,11 +130,11 @@ def show2(Dict, printFormat):
             if 'Tersedia' in value: 
                 l=l+1
         if l!=0:
-            D=C.copy()
+            D=C9.copy()
             F=[]
             i=0
             #Mengubah Dict menjadi list
-            for v in C.values():
+            for v in C9.values():
                 F.insert(i,v)
                 i=i+1
             #print(F)
@@ -147,26 +148,30 @@ def show2(Dict, printFormat):
             A.sort()
             #print(A)
 
-            listBuku={}
-            listBuku['column']=F[0]
+            # listBuku={}
+            # listBuku['column']=F[0]
             i=1
             #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
             for item in A:
                 for x,y in D.items():
                     if item in y:
-                        C['buku-'+str(i-1)]=y
+                        C9['buku-'+str(i-1)]=y
                         i=i+1
             #print(C)
-            printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+            printFormat = "{:<2}" + "{:<17}" * (len(C9['column']))
             ##Daftar semua buku
             k=1
-            for ValuesD in C.values():
-                if C['column']!=ValuesD:
+            for ValuesD in C9.values():
+                if C9['column']!=ValuesD:
                     ValuesD[0]=k
                     k=k+1    
+            # for value in C9.values():
+            #     print(printFormat.format("", *value))
+    
+          
             k=1
-            for value in C.values():
-                if C['column']==value:
+            for value in C9.values():
+                if C9['column']==value:
                     print("Berikut daftar buku yang tersedia berdasarkan urutan judul buku dari A-Z, a-z: ")
                     print(printFormat.format("", *value)) 
                 else:
@@ -174,6 +179,14 @@ def show2(Dict, printFormat):
                         value[0]=k 
                         k+=1
                         print(printFormat.format("", *value))
+            k=1
+            for ValuesD in Dict.values():
+                if Dict['column']!=ValuesD:
+                    ValuesD[0]=k
+                    k=k+1    
+            # for value in listBuku.values():
+            #     print(printFormat.format("", *value))
+ 
             show2(Dict, printFormat)            
         if l==0:
             print("""
@@ -237,13 +250,13 @@ def show(listBuku, printFormat):
             """.format(nama)
                 )
     S1=pypi.inputInt(prompt='', blockRegexes='0', lessThan=4)
-    C=listBuku.copy()
+    C9=listBuku.copy()
     if S1==1:
-        D=C.copy()
+        D=C9.copy()
         F=[]
         i=0
         #Mengubah Dict menjadi list
-        for v in C.values():
+        for v in C9.values():
             F.insert(i,v)
             i=i+1
         #print(F)
@@ -257,39 +270,42 @@ def show(listBuku, printFormat):
         A.sort()
         #print(A)
 
-        listBuku={}
-        listBuku['column']=F[0]
+        # listBuku={}
+        # listBuku['column']=F[0]
         i=1
         #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
         for item in A:
             for x,y in D.items():
                 if item in y:
-                    C['buku-'+str(i-1)]=y
+                    C9['buku-'+str(i-1)]=y
                     i=i+1
         #print(C)
-        printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+        printFormat = "{:<2}" + "{:<17}" * (len(C9['column']))
         ##Daftar semua buku
         k=1
-        for ValuesD in C.values():
-            if C['column']!=ValuesD:
+        for ValuesD in C9.values():
+            if C9['column']!=ValuesD:
                 ValuesD[0]=k
                 k=k+1    
-        for value in C.values():
+        for value in C9.values():
             print(printFormat.format("", *value))
-
+ 
         k=1
         for ValuesD in listBuku.values():
             if listBuku['column']!=ValuesD:
                 ValuesD[0]=k
                 k=k+1    
-        main()
+        # for value in listBuku.values():
+        #     print(printFormat.format("", *value))
+   
+        show(listBuku,printFormat)
 
     elif S1==2:
-        D=C.copy()
+        D=C9.copy()
         F=[]
         i=0
         #Mengubah Dict menjadi list
-        for v in C.values():
+        for v in C9.values():
             F.insert(i,v)
             i=i+1
         #print(F)
@@ -303,34 +319,41 @@ def show(listBuku, printFormat):
         A.sort()
         #print(A)
 
-        listBuku={}
-        listBuku['column']=F[0]
+        # listBuku={}
+        # listBuku['column']=F[0]
         i=1
         #Memasukkan nilai ke dalam dict sesuai urutan item yang sudah di sort
         for item in A:
             for x,y in D.items():
                 if item in y:
-                    C['buku-'+str(i-1)]=y
+                    C9['buku-'+str(i-1)]=y
                     i=i+1
         #print(C)
-        printFormat = "{:<2}" + "{:<17}" * (len(C['column']))
+        printFormat = "{:<2}" + "{:<17}" * (len(C9['column']))
         ##Daftar semua buku
         k=1
-        for ValuesD in C.values():
-            if C['column']!=ValuesD:
+        for ValuesD in C9.values():
+            if C9['column']!=ValuesD:
                 ValuesD[0]=k
                 k=k+1    
-        for value in C.values():
-            print(printFormat.format("", *value))        
+        for value in C9.values():
+            print(printFormat.format("", *value))
 
+        # k=1
+        # for ValuesD in listBuku.values():
+        #     if listBuku['column']!=ValuesD:
+        #         ValuesD[0]=k
+        #         k=k+1    
         k=1
         for ValuesD in listBuku.values():
             if listBuku['column']!=ValuesD:
                 ValuesD[0]=k
                 k=k+1    
-
+        # for value in listBuku.values():
+        #     print(printFormat.format("", *value))
    
-        main()
+        show(listBuku,printFormat)
+   
 
     elif S1==3:
         main()
