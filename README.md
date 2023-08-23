@@ -32,7 +32,7 @@ Dalam aplikasi ini terdapat 10 menu utama yang dapat dijalankan oleh user yaitu:
 Program yang dibangun dibentuk dari beberapa fungsi berikut:
 1. Fungsi login()
     <br>Fungsi login akan dijalankan ketika user baru pertama kali menjalankan program sebelum masuk ke menu utama, atau dengan memilih Menu 9 yaitu "Log In Kembali" di halaman menu utama. Pada menu ini user akan diminta menginputkan nama dan nomor pengenal dalam hal ini siswa atau guru sebagai pengunjung perpustakaan yang memiliki NIS/NIP (Nomor Induk Siswa bagi siswa atau Nomor Induk Pegawai bagi guru).
-3. Fungsi main()
+2. Fungsi main()
     <br>Fungsi main yang akan dijalankan ketika user berhasil memasukkan nama dan NIS/NIP dengan benar pada fungsi login. Fungsi ini juga bisa dijalankan ketika user memilih pilihan "Kembali ke menu utama". Pada Fungsi main menampilkan 10 menu utama yang dapat dipilih oleh user, beberapa menu diantaranya setelah dipilih user akan diminta untuk memasukkan password. Jika user memilih Menu 10 yaitu Exit maka user akan keluar dari aplikasi program yang dijalankan.
 5. Fungsi show()
     <br>Fungsi show akan dijalankan ketika user memilih Menu 1 yaitu "Menampilkan daftar semua buku" pada fungsi main. User dapat melihat daftar semua buku berdasarkan urutan tertentu baik yang tersedia maupun yang sedang dipinjam.
