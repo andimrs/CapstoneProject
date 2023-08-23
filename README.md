@@ -29,6 +29,8 @@ Dalam aplikasi ini terdapat 10 menu utama yang dapat dijalankan oleh user yaitu:
 9. Log In Kembali
 10. Exit
 
+Untuk penjelasan lebih detail mengenai keluaran/ouput dari pilihan menu diatas, silahkan kunjungi link berikut https://medium.com/@andimrinaldisaputraa/penerapan-fitur-crud-pada-aplikasi-perpustakaan-menggunakan-python-c5edec207450
+
 Program yang dibangun dibentuk dari beberapa fungsi berikut:
 1. Fungsi login()
     <br>Fungsi login akan dijalankan ketika user baru pertama kali menjalankan program sebelum masuk ke menu utama, atau dengan memilih Menu 9 yaitu "Log In Kembali" di halaman menu utama. Pada menu ini user akan diminta menginputkan nama dan nomor pengenal dalam hal ini siswa atau guru sebagai pengunjung perpustakaan yang memiliki NIS/NIP (Nomor Induk Siswa bagi siswa atau Nomor Induk Pegawai bagi guru).
