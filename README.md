@@ -75,7 +75,7 @@ Dalam program ini Anda bisa mengatur:
  Pengaturan Awal Program:
  1. Terdapat 5 buku, 3 buku sudah dipinjam oleh satu orang yang sama dan 2 buku sisanya tersedia 
  2. Tanggal waktu kunjung atau waktu saat program dijalankan yaitu 2023-05-24
- 3. Batas jumlah peminjaman buku sebanyak 3 buah per orang dengan kode uniknya NIS/NIK
+ 3. Batas jumlah peminjaman buku sebanyak 3 buah per orang dengan kode uniknya NIS/NIP
  4. Maksimal dan minimal waktu peminjaman buku berturut-turut 7 hari dan 1 hari dari tanggal peminjaman buku
  5. Passwordnya jcds01, yang harus dimasukkan saat ingin mengakses menu Menambahkan Buku, Mengupdate Tahun Edisi Buku, dan Menghapus Buku
 
