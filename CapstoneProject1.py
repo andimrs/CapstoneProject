@@ -986,7 +986,13 @@ def login():
     global nis
     global waktu_kunjung
     waktu_kunjung='2023-05-24' #Diatur manual tanggalnya
-    nama= pypi.inputStr(prompt='Silahkan masukkan nama lengkap Anda: ' , applyFunc=lambda x: x.capitalize(), blockRegexes='1234567890')
+    N= pypi.inputStr(prompt='Silahkan masukkan nama lengkap Anda: ' , applyFunc=lambda x: x.capitalize(), blockRegexes='1234567890')
+    Nama=N.split()
+    b=''
+    for i in range(0,len(Nama)): #0 termasuk sampe kurang dari len(Nama) 
+        a=Nama[i].capitalize()
+        b=b+a+' '
+    nama=b
     nis1 = pypi.inputInt(prompt='Silahkan masukkan NIS/NIP Anda: ')
     nis=str(nis1)
     print("""
