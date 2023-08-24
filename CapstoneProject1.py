@@ -416,7 +416,7 @@ def minjam(Nama,NIS,listBuku,tgl_skrg):
         A= input('Masukkan ISBN buku yang ingin dipinjam (): ')
         i=0
         for value in E.values():
-            if A in value:
+            if A in value and 'Tersedia' in value:
                 i=1
                 print(
                         """
