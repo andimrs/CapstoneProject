@@ -1,6 +1,6 @@
 # Aplikasi Perpustakaan Sains
 
-Sebuah layanan aplikasi menggunakan bahasa pemrograman Python yang dapat membantu siswa dan guru untuk mencari, menghapus, mengubah, dan menyimpan suatu data buku selama mereka melakukan kegiatan di dalam perpustakaan. Kegiatan yang dapat mereka lakukan dengan menggunakan aplikasi ini meliputi mengecek status ketersediaan dari suatu buku,  meminjam, mengembalikan, dan memperpanjang buku, memperbarui tahun edisi buku, serta menambahkan dan menghapus data suatu buku.
+Sebuah layanan aplikasi menggunakan bahasa pemrograman Python yang dapat membantu siswa dan guru untuk mencari, menghapus, mengubah, dan menyimpan suatu data buku secara mudah dan cepat selama mereka melakukan kegiatan di dalam perpustakaan. Kegiatan yang dapat mereka lakukan dengan menggunakan aplikasi ini meliputi mengecek status ketersediaan dari suatu buku,  meminjam, mengembalikan, dan memperpanjang buku, memperbarui tahun edisi buku, serta menambahkan dan menghapus data suatu buku.
 
 ## Instalasi
 
